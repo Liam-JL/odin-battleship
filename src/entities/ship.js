@@ -4,11 +4,19 @@ export class Ship {
         this._timesHit = 0;
     } 
 
+    getLength() {
+        return this._length;
+    }
+
     hit() {
-       this._timesHit ++;
+        if(this._timesHit < this._length) {
+            this._timesHit ++;
+        }
+
        return this._timesHit;
     }
 
     isSunk() {
+        return this._timesHit >= this._length;
     }
  }
