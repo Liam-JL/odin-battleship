@@ -4,6 +4,7 @@ export class Gameboard {
     constructor() {
         //10x10 grid traditionally
         this._board = Array(10).fill(null).map(() => Array(10).fill(null));
+        this._availableShips = [5,4,3,3,2]
     }
 
     getBoard() {
@@ -18,6 +19,10 @@ export class Gameboard {
                 if(i < 0 || i > 9) {
                     return false
                 }
+            }
+
+            if(this._board[cell[0]][cell[1]] instanceof Ship) {
+                return false
             }
         }
         return true;
@@ -40,11 +45,37 @@ export class Gameboard {
         return cells
     }
 
-
     placeShip(length, startCoord = [0,0], direction = "horizontal") {
         //Traditionally a player gets 5 ships
         //5,4,3,3,2 length ships
+        const ship = new Ship(length);
 
+        //Check ship is still available to place
+        if(!this._availableShips.includes(ship._length)){
+            switch(ship._length) {
+                case 3:
+                    throw new Error("Ship length 3 already placed twice");
+                    break;
+                default:
+                    throw new Error(`Ship length ${ship._length} already placed`);
+            } 
+        }
+
+        //Check validity of ship placement
+        const placementCells = this._getShipCells(length,startCoord, direction);
+        if(this._isValidPlacement(placementCells)) {
+            for(let cell of placementCells){
+                this._board[cell[0]][cell[1]] = ship;
+            }
+
+        } else {
+            throw new Error("Invalid ship placement");
+        }
+
+    
+        //Remove ship from available ships
+        const availableShipIndex = this._availableShips.indexOf(ship._length);
+        this._availableShips.splice(availableShipIndex, 1);     
     }
 
     receiveAttack(coord) {
