@@ -11,8 +11,16 @@ export class Gameboard {
         return this._board
     }
 
-    _isValidPlacement() {
+    _isValidPlacement(cells) {
         //return true or false
+        for(let cell of cells) {
+            for(let i of cell) {
+                if(i < 0 || i > 9) {
+                    return false
+                }
+            }
+        }
+        return true;
     }
 
     _getShipCells(length, startCoord, direction = "horizontal") {
