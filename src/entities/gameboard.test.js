@@ -1,8 +1,6 @@
 import { Gameboard } from "./gameboard";
 import { Ship } from "./ship";
 
-
-
 describe("getBoard()", () => {
     test("getBoard returns board", () => {
         const board = new Gameboard();
@@ -66,4 +64,64 @@ describe("_isValidPlacement()", () => {
             expect(board._isValidPlacement(badPlacement)).toBe(false);
     })
 })
- 
+
+describe("placeShip", () => {
+    test('cell [0][0] contains a Ship object after placing a ship', () => {
+        const board = new Gameboard();
+        board.placeShip(2, [0, 0], 'horizontal');
+        const cell = board.getBoard()[0][0];
+
+        expect(cell).toBeInstanceOf(Ship);
+    });
+
+    test('all ship cells point to the same Ship instance', () => {
+        const board = new Gameboard();
+        const length = 3;
+        const start = [2, 2];
+        const direction = 'horizontal';
+
+        board.placeShip(length, start, direction);
+        const placedShip = board.getBoard()[2][2]; // reference to the first cell
+
+        for (let i = 0; i < length; i++) {
+            expect(board.getBoard()[2][2 + i]).toBe(placedShip);
+        }
+
+        expect(placedShip).toBeInstanceOf(Ship);
+    });
+
+    test('throws error when placing ship out of bounds (horizontal)', () => {
+        const board = new Gameboard();
+        expect(() => {
+            board.placeShip(5, [0, 7], 'horizontal');
+        }).toThrow('Invalid ship placement');
+    });
+
+    test('throws error when placing ship on top of another', () => {
+        const board = new Gameboard();
+        board.placeShip(3, [2, 2], 'horizontal'); // valid placement
+
+        expect(() => {
+            board.placeShip(4, [2, 1], 'horizontal'); // overlaps [2,2]
+        }).toThrow('Invalid ship placement');
+    });
+
+    test('does not allow placing more than one ship of length 5, 4, or 2 — allows two 3s', () => {
+        const board = new Gameboard();
+
+        // Valid placements
+        expect(() => board.placeShip(5, [0, 0], 'horizontal')).not.toThrow();
+        expect(() => board.placeShip(4, [1, 0], 'horizontal')).not.toThrow();
+        expect(() => board.placeShip(3, [2, 0], 'horizontal')).not.toThrow();
+        expect(() => board.placeShip(3, [3, 0], 'horizontal')).not.toThrow();
+        expect(() => board.placeShip(2, [4, 0], 'horizontal')).not.toThrow();
+
+        // Invalid duplicates
+        expect(() => board.placeShip(5, [5, 0], 'horizontal')).toThrow('Ship length 5 already placed');
+        expect(() => board.placeShip(4, [6, 0], 'horizontal')).toThrow('Ship length 4 already placed');
+        expect(() => board.placeShip(2, [7, 0], 'horizontal')).toThrow('Ship length 2 already placed');
+
+        // Third 3-length ship is invalid
+        expect(() => board.placeShip(3, [8, 0], 'horizontal')).toThrow('Ship length 3 already placed twice');
+    });
+})
