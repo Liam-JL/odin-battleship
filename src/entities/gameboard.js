@@ -5,6 +5,7 @@ export class Gameboard {
         //10x10 grid traditionally
         this._board = Array(10).fill(null).map(() => Array(10).fill(null));
         this._availableShips = [5,4,3,3,2]
+        this._cellsAttacked = [];
     }
 
     getBoard() {
@@ -79,11 +80,26 @@ export class Gameboard {
     }
 
     receiveAttack(coord) {
+        //Check if cell has been attacked before and throw error if has
+        if(this._cellsAttacked.some(cell => cell[0] === coord[0] && cell[1] === coord[1])){
+            throw new Error("Cell has already been attacked")
+        }
 
+        this._cellsAttacked.push(coord);
+
+        //Check if ship or null
+        const [row, col] = coord;
+        const target = this._board[row][col];
+        if(target instanceof Ship) {
+            target.hit();
+            return "hit";
+        }
+
+        return "miss";
     }
 
     allSunk() {
-
+        
     }
 }
 
