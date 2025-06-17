@@ -4,7 +4,8 @@ export class Gameboard {
     constructor() {
         //10x10 grid traditionally
         this._board = Array(10).fill(null).map(() => Array(10).fill(null));
-        this._availableShips = [5,4,3,3,2]
+        this._availableShips = [5,4,3,3,2];
+        this._sunkShips = [];
         this._cellsAttacked = [];
     }
 
@@ -92,6 +93,9 @@ export class Gameboard {
         const target = this._board[row][col];
         if(target instanceof Ship) {
             target.hit();
+            if (target.isSunk()) {
+                this._sunkShips.push(target.getLength());
+            }
             return "hit";
         }
 
@@ -99,7 +103,12 @@ export class Gameboard {
     }
 
     allSunk() {
-        
+        //Assumes all ships are placed - write into game rules
+        const sunkShips = this._sunkShips.sort();
+        if(sunkShips.toString() === "2,3,3,4,5"){
+            return true
+        }
+        return false
     }
 }
 
