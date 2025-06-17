@@ -125,3 +125,40 @@ describe("placeShip", () => {
         expect(() => board.placeShip(3, [8, 0], 'horizontal')).toThrow('Ship length 3 already placed twice');
     });
 })
+
+describe("receiveAttack", () => {
+    test("Board records cell that has been attacked", () => {
+        const board = new Gameboard();
+        board.receiveAttack([0, 0]);
+        expect(board._cellsAttacked).toEqual(expect.arrayContaining([[0, 0]]));
+    });
+
+    test("Board records multiple attacked cells", () => {
+        const board = new Gameboard();
+        board.receiveAttack([0, 0]);
+        board.receiveAttack([0, 1]);
+        expect(board._cellsAttacked).toEqual(expect.arrayContaining([[0, 0], [0, 1]]));
+    });
+
+    test("Throw error if attacking same cell twice", () => {
+        const board = new Gameboard();
+        board.receiveAttack([1, 1]);
+        expect(() => board.receiveAttack([1, 1])).toThrow("Cell has already been attacked");
+    });
+
+      test('returns "hit" if a ship is at the attacked coordinate', () => {
+        const board = new Gameboard();
+        board.placeShip(2, [0, 0], 'horizontal'); // places ship at [0,0] and [0,1]
+
+        const result = board.receiveAttack([0, 0]);
+        expect(result).toBe('hit');
+    });
+
+    test('returns "miss" if no ship is at the attacked coordinate', () => {
+        const board = new Gameboard();
+        board.placeShip(2, [0, 0], 'horizontal'); // but we attack a different cell
+
+        const result = board.receiveAttack([5, 5]);
+        expect(result).toBe('miss');
+    });
+})
