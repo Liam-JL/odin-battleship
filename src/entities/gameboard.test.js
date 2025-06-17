@@ -162,3 +162,36 @@ describe("receiveAttack", () => {
         expect(result).toBe('miss');
     });
 })
+
+describe('allSunk()', () => {
+  test('returns false if not all ships are sunk', () => {
+    const board = new Gameboard();
+    board.placeShip(2, [0, 0], 'horizontal'); // Ship at [0,0] and [0,1]
+    board.placeShip(3, [2, 0], 'horizontal'); // Ship at [2,0], [2,1], [2,2]
+
+    // Only sink one ship
+    board.receiveAttack([0, 0]);
+    board.receiveAttack([0, 1]);
+
+    expect(board.allSunk()).toBe(false);
+  });
+
+  test('returns true if all ships are sunk', () => {
+    const board = new Gameboard();
+    // Place all 5 ships (lengths: 5, 4, 3, 3, 2)
+    board.placeShip(5, [0, 0], 'horizontal'); // [0,0] to [0,4]
+    board.placeShip(4, [1, 0], 'horizontal'); // [1,0] to [1,3]
+    board.placeShip(3, [2, 0], 'horizontal'); // [2,0] to [2,2]
+    board.placeShip(3, [3, 0], 'horizontal'); // [3,0] to [3,2]
+    board.placeShip(2, [4, 0], 'horizontal'); // [4,0] to [4,1]
+
+    // Hit all cells of all ships
+    for (let i = 0; i < 5; i++) board.receiveAttack([0, i]); // Ship 5
+    for (let i = 0; i < 4; i++) board.receiveAttack([1, i]); // Ship 4
+    for (let i = 0; i < 3; i++) board.receiveAttack([2, i]); // Ship 3a
+    for (let i = 0; i < 3; i++) board.receiveAttack([3, i]); // Ship 3b
+    for (let i = 0; i < 2; i++) board.receiveAttack([4, i]); // Ship 2
+
+    expect(board.allSunk()).toBe(true);
+  });
+});
