@@ -1,3 +1,16 @@
+.infobar {
+  background-color: rgb(231, 231, 231);
+  padding: 0.8rem;
+  border-radius: 4px;
+  width: 30%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .gameboard {
     display: grid;
     grid-template-columns: repeat(10, 40px);
@@ -23,4 +36,30 @@
 }
 .cell.miss {
   background-color: gray;
+}
+
+.player-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.controls__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.controls__btn > svg{
+  fill: lightslategrey;
 }

@@ -1,7 +1,22 @@
 import { playerSection, computerSection} from "../widgets/sections";
+import { infoBar } from "../widgets/infobar";
 
-export function renderAppWidgets(){
+function renderHeaderWidgets(){
+    const header = document.getElementById("header");
+    header.appendChild(infoBar())
+}
+
+function renderSectionWidgets(){
     const app = document.getElementById("app");
     app.appendChild(playerSection());
     app.appendChild(computerSection());
 }
+
+export function renderAppWidgets() {
+    renderHeaderWidgets();
+    renderSectionWidgets();
+}
+
+
+
+

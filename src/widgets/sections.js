@@ -1,5 +1,6 @@
 import { Player } from "../entities/player";
 import { generateBoard } from "../features/generate-board";
+import { controlButtons } from "./controls";
 
 
 export function playerSection() {
@@ -13,8 +14,7 @@ export function playerSection() {
     const gameboard = section.querySelector(".gameboard");
     generateBoard(gameboard);
 
-    //Create highlight around section when player of that section is active
-    //Pull in controls and make them work only when it is correct players turn.
+    section.appendChild(controlButtons());
     return section;
 }
 
@@ -30,4 +30,6 @@ export function computerSection() {
     generateBoard(gameboard);
     return section;
 }
+
+
 
