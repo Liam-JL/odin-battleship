@@ -24,10 +24,9 @@ select {
 }
 
 header {
-    margin: 10px;
+    margin: 15px;
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -38,3 +37,4 @@ main {
     justify-content: center;
     gap: 5rem;
 }
+
