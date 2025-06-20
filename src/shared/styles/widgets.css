@@ -24,3 +24,29 @@
 .cell.miss {
   background-color: gray;
 }
+
+.player-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.controls__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.controls__btn > svg{
+  fill: lightslategrey;
+}
