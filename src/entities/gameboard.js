@@ -14,6 +14,11 @@ export class Gameboard {
         return this._board
     }
 
+    getAvailableShips() {
+        // console.log(this._availableShips)
+        return this._availableShips;
+    }
+
     _isValidPlacement(cells) {
         //return true or false
         for(let cell of cells) {
