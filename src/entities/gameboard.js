@@ -79,10 +79,12 @@ export class Gameboard {
             throw new Error("Invalid ship placement");
         }
 
-    
         //Remove ship from available ships
         const availableShipIndex = this._availableShips.indexOf(ship._length);
-        this._availableShips.splice(availableShipIndex, 1);     
+        this._availableShips.splice(availableShipIndex, 1);
+        
+        //return cells of placed ship
+        return placementCells;
     }
 
     receiveAttack(coord) {
