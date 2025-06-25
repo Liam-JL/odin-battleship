@@ -63,3 +63,7 @@
 .controls__btn > svg{
   fill: lightslategrey;
 }
+
+.cell[data-ship="true"] {
+  border: blue 2px solid;
+}

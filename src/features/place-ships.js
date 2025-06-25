@@ -19,7 +19,15 @@ function getRandomInt(max) {
 }
 
 export function renderPlacedShips(shipCellData, uiBoard) {
-    
+    console.log(uiBoard)
+    console.log(shipCellData)
+    for(let ship of shipCellData) {
+        for(let cells of ship) {
+            const cell = uiBoard.querySelectorAll(`[data-row="${cells[0]}"]`)[cells[1]]
+            cell.dataset.ship = true;
+            console.log(cell)
+        }
+    }
 }
 
 function randomise() {
