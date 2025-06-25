@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.gameboard {
+.ui-board {
     display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
@@ -26,7 +26,7 @@
   border: 1px solid #ccc;
 }
 
-.gameboard--computer > .cell {
+.ui-board--computer > .cell {
     background-color: lightgrey;
     cursor: pointer;
 }
@@ -62,4 +62,8 @@
 
 .controls__btn > svg{
   fill: lightslategrey;
+}
+
+.cell[data-ship="true"] {
+  border: blue 2px solid;
 }
