@@ -19,6 +19,13 @@ export class Gameboard {
         return this._availableShips;
     }
 
+    resetBoard() {
+        this._board = Array(10).fill(null).map(() => Array(10).fill(null));
+        this._availableShips = [5,4,3,3,2];
+        this._sunkShips = [];
+        this._cellsAttacked = [];
+    }
+
     _isValidPlacement(cells) {
         //return true or false
         for(let cell of cells) {

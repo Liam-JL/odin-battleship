@@ -1,7 +1,7 @@
 import { Player } from "../entities/player";
 import { generateBoard } from "../features/generate-board";
 import { controlButtons } from "./controls";
-import { placeShipsRandomly, renderPlacedShips} from "../features/place-ships";
+import { placeShipsRandomly, renderPlacedShips } from "../features/place-ships";
 
 
 export function playerSection() {
@@ -15,14 +15,13 @@ export function playerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    section.appendChild(controlButtons());
-
     const sectionPlayer = new Player();
     const cells = placeShipsRandomly(sectionPlayer.board);
     renderPlacedShips(cells, uiBoard);
+    
+    section.appendChild(controlButtons(sectionPlayer.board, uiBoard));
 
     return section;
-
 }
 
 export function computerSection() {
