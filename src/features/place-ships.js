@@ -18,18 +18,24 @@ function getRandomInt(max) {
     return randomInt;
 }
 
-export function renderPlacedShips(shipCellData, uiBoard) {
-    console.log(uiBoard)
-    console.log(shipCellData)
+export function renderPlacedShips(shipCellData, uiBoard) {    
     for(let ship of shipCellData) {
         for(let cells of ship) {
             const cell = uiBoard.querySelectorAll(`[data-row="${cells[0]}"]`)[cells[1]]
             cell.dataset.ship = true;
-            console.log(cell)
         }
     }
 }
 
-function randomise() {
+function clearUiBoard(uiBoard) {
+    for(let child of uiBoard.children) {
+        child.dataset.ship = false;
+    }
+}
 
+export function handleRandomiseBtn(gameboard, uiBoard) {
+    clearUiBoard(uiBoard)
+    gameboard.resetBoard();
+    const newPlacementCells = placeShipsRandomly(gameboard);
+    renderPlacedShips(newPlacementCells, uiBoard)
 }
