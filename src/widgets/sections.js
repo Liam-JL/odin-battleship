@@ -1,4 +1,4 @@
-import { Player } from "../entities/player";
+import { Player, Computer } from "../entities/player";
 import { generateBoard } from "../features/generate-board";
 import { controlButtons } from "./controls";
 import { placeShipsRandomly, renderPlacedShips } from "../features/place-ships";
@@ -35,7 +35,7 @@ export function computerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    const sectionPlayer = new Player();
+    const sectionPlayer = new Computer();
     placeShipsRandomly(sectionPlayer.board);
 
     return section;

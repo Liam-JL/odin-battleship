@@ -1,4 +1,6 @@
 import { handleRandomiseBtn } from "../features/place-ships";
+import { handlePlayBtn } from "../features/handlePlayBtn";
+import { getGameState } from "../shared/gamecontroller";
 
 //Randomise and reset buttons
 export function controlButtons(gameboard, uiBoard) {
@@ -13,8 +15,9 @@ export function controlButtons(gameboard, uiBoard) {
     `;
 
     randomiseBtn.addEventListener("click", () => {
-        console.log("randomisebtn clicked")
-        handleRandomiseBtn(gameboard, uiBoard);
+        if (getGameState() === "inactive") {
+            handleRandomiseBtn(gameboard, uiBoard);
+        }
     })
 
     const playBtn = document.createElement("button");
@@ -23,6 +26,10 @@ export function controlButtons(gameboard, uiBoard) {
         Play
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M80-240v-480h80v480H80Zm560 0-57-56 144-144H240v-80h487L584-664l56-56 240 240-240 240Z"/></svg>
     `;
+
+    playBtn.addEventListener("click", () => {
+        handlePlayBtn();
+    })
 
     controls.append(randomiseBtn, playBtn);
     return controls;  
