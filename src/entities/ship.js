@@ -2,6 +2,7 @@ export class Ship {
     constructor(length) {
         this._length = length;
         this._timesHit = 0;
+        this._cells = [];
     } 
 
     getLength() {
@@ -18,5 +19,13 @@ export class Ship {
 
     isSunk() {
         return this._timesHit >= this._length;
+    }
+
+    setCells(cells) {
+        this._cells = cells;
+    }
+
+    getCells() {
+        return this._cells;
     }
  }
