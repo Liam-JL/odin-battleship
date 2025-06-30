@@ -5,6 +5,9 @@ export function generateBoard(gameboardDiv) {
         cell.classList.add('cell');
         cell.dataset.row = row;
         cell.dataset.col = col;
+        cell.innerHTML = `
+            <span class="material-symbols-outlined">skull</span>
+        `
         gameboardDiv.appendChild(cell);
         }
     }

@@ -25,6 +25,10 @@ export class Gameboard {
         this._sunkShips = [];
         this._cellsAttacked = [];
     }
+    
+    getSunkShips() {
+        return this._sunkShips;
+    }
 
     _isValidPlacement(cells) {
         //return true or false
@@ -90,6 +94,9 @@ export class Gameboard {
         const availableShipIndex = this._availableShips.indexOf(ship._length);
         this._availableShips.splice(availableShipIndex, 1);
         
+        //Add cells to ship
+        ship.setCells(placementCells);
+
         //return cells of placed ship
         return placementCells;
     }

@@ -24,6 +24,13 @@
   height: 40px;
   background-color: lightblue;
   border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell > span {
+  display: none;
 }
 
 .ui-board--computer > .cell {
@@ -36,6 +43,15 @@
 }
 .cell.miss {
   background-color: gray;
+}
+
+.cell.sunk {
+  background-color: rgb(197, 34, 34);
+  border: 4px solid black;
+}
+
+.cell.sunk > span {
+  display: block;
 }
 
 .player-section {
