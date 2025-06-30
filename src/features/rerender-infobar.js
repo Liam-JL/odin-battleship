@@ -1,4 +1,4 @@
-import { getGameState, getActivePlayer } from "../shared/gamecontroller";
+import { getActivePlayer } from "../shared/gamecontroller";
 
 export function reRenderInfoBar() {
     const infoBar = document.getElementById("infoBar");

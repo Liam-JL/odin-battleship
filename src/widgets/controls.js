@@ -1,5 +1,5 @@
 import { handleRandomiseBtn } from "../features/place-ships";
-import { handlePlayBtn } from "../features/handlePlayBtn";
+import { handlePlayBtn } from "../features/handle-play-btn";
 import { getGameState } from "../shared/gamecontroller";
 
 //Randomise and reset buttons
