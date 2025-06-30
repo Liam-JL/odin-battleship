@@ -2,13 +2,15 @@ import { Player, Computer } from "../entities/player";
 import { generateBoard } from "../features/generate-board";
 import { controlButtons } from "./controls";
 import { placeShipsRandomly, renderPlacedShips } from "../features/place-ships";
+import { handleCellClick } from "../features/handle-cell-click";
+
 
 
 export function playerSection() {
     const section = document.createElement("section");
     section.classList.add("player-section");
     section.innerHTML = `
-        <div id="userGameboard" class="ui-board ui-board--user"></div>
+        <div id="userUiBoard" class="ui-board ui-board--user"></div>
         <span>Your grid</span>
     `;
     
@@ -28,7 +30,7 @@ export function computerSection() {
     const section = document.createElement("section");
     section.classList.add("player-section");
     section.innerHTML = `
-        <div class="ui-board ui-board--computer"></div>
+        <div id="computerUiBoard" class="ui-board ui-board--computer"></div>
         <span>Computer grid</span>
     `;
     
@@ -37,6 +39,13 @@ export function computerSection() {
 
     const sectionPlayer = new Computer();
     placeShipsRandomly(sectionPlayer.board);
+
+    //Event listeners
+    for (let cell of uiBoard.children) {
+        cell.addEventListener("click", () => {
+            handleCellClick(sectionPlayer.board, uiBoard);
+        })
+    }
 
     return section;
 }
