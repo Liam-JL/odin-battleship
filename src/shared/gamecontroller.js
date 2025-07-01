@@ -2,7 +2,7 @@ let gameState = "inactive";
 let activePlayer = "computer";
 
 export function toggleGameState() {
-    gameState = "inactive" ? "active" : "inactive";
+    gameState = gameState === "inactive" ? "active" : "inactive"
 }
 
 export function getGameState() {
@@ -10,7 +10,7 @@ export function getGameState() {
 }
 
 export function toggleActivePlayer() {
-    activePlayer = "computer" ? "user" : "computer";
+    activePlayer = activePlayer === "computer" ? "user" : "computer";
 }
 
 export function getActivePlayer() {
