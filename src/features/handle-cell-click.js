@@ -1,4 +1,5 @@
-import { getGameState, getActivePlayer } from "../shared/gamecontroller"
+import { getGameState} from "../shared/gamecontroller"
+import { nextTurn } from "./next-turn";
 
 export function handleCellClick(board, uiBoard) {
     if( getGameState() === "active") {
@@ -9,6 +10,11 @@ export function handleCellClick(board, uiBoard) {
             if(attackResult === "hit") {
                 renderSunkShip(cell, board, uiBoard);
             }
+
+            if (attackResult === "miss") {
+                nextTurn()
+            }
+
         } catch(error) {
             console.error(error)
             //TODO Log error in info bar
@@ -36,10 +42,3 @@ function renderSunkShip(cell, board, uiBoard) {
         });
     }
 }
-
-
-
-
-
-
-
