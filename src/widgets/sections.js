@@ -1,8 +1,10 @@
-import { Player, Computer } from "../entities/player";
+import { Player} from "../entities/player";
 import { generateBoard } from "../features/generate-board";
 import { controlButtons } from "./controls";
 import { placeShipsRandomly, renderPlacedShips } from "../features/place-ships";
 import { handleCellClick } from "../features/handle-cell-click";
+import { savePlayer } from "../shared/gamecontroller";
+
 
 
 
@@ -17,7 +19,8 @@ export function playerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    const sectionPlayer = new Player();
+    const sectionPlayer = new Player("User");
+    savePlayer(sectionPlayer);
     const cells = placeShipsRandomly(sectionPlayer.board);
     renderPlacedShips(cells, uiBoard);
     
@@ -37,13 +40,15 @@ export function computerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    const sectionPlayer = new Computer();
+    const sectionPlayer = new Player("Computer");
+    savePlayer(sectionPlayer);
     placeShipsRandomly(sectionPlayer.board);
 
     //Event listeners
     for (let cell of uiBoard.children) {
         cell.addEventListener("click", () => {
             handleCellClick(sectionPlayer.board, uiBoard);
+
         })
     }
 

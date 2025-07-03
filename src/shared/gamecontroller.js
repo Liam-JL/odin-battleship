@@ -1,5 +1,5 @@
 let gameState = "inactive";
-let activePlayer = "computer";
+let players = [];
 
 export function toggleGameState() {
     gameState = gameState === "inactive" ? "active" : "inactive"
@@ -9,14 +9,23 @@ export function getGameState() {
     return gameState;
 }
 
-export function toggleActivePlayer() {
-    activePlayer = activePlayer === "computer" ? "user" : "computer";
+export function savePlayer(player) {
+    players.push(player);
+}
+
+export function getPlayers() {
+    return players;
 }
 
 export function getActivePlayer() {
-    return activePlayer;
+    for(let player of players) {
+        if(player.isActive()) {
+            return player
+        }
+    }
 }
 
-
-
+export function toggleActivePlayer() {
+    players.forEach(player => player.toggleActive())
+}
 

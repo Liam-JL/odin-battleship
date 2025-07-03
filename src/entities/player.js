@@ -1,19 +1,17 @@
 import { Gameboard } from "./gameboard";
 
 export class Player {
-    constructor() {
-        this._active = false;
+    #active = false
+    constructor(name) {
+        this.name = name;
         this.board = new Gameboard;
     }
 
-    Attack(coord) {
-        
+    isActive() {
+        return this.#active;
     }
-}
 
-
-export class Computer extends Player {
-    chooseNextAttack() {
-
+    toggleActive() {
+        this.#active = this.#active === false ? true : false;
     }
 }
