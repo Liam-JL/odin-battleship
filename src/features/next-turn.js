@@ -5,12 +5,9 @@ import { reRenderInfoBar } from "./rerender-infobar";
 export function nextTurn() {
     toggleGameState();
     toggleActivePlayer();
+    reRenderInfoBar()
     const activePlayer = getActivePlayer();
-    console.log(activePlayer)
-    if(activePlayer.name === "Computer") {
-        reRenderInfoBar()
+    if(activePlayer.name === "computer") {
         computerAttack()
     } 
-
-    toggleGameState()
 }
