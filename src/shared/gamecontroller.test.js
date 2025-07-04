@@ -10,5 +10,12 @@ describe("savePlayer", () => {
 })
 
 describe("get active player", () => {
-    test("active player is returned")
+    test("active player is returned", () => {
+        const user = new Player("user");
+        const computer = new Player("computer");
+        savePlayer(user);
+        savePlayer(computer);
+        user.toggleActive();
+        expect(getActivePlayer().name).toBe("user")
+    } )
 })

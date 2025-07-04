@@ -8,5 +8,7 @@ export function handlePlayBtn() {
     toggleGameState();
     reRenderInfoBar();
     //Change play btn to reset
+    const playBtn = document.getElementById("playBtn");
+    playBtn.style.display = "none";
 }
 

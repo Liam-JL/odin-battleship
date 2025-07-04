@@ -3,7 +3,7 @@ import { getActivePlayer } from "../shared/gamecontroller";
 export function reRenderInfoBar() {
     const infoBar = document.getElementById("infoBar");
     const activePlayer = getActivePlayer();
-    if (activePlayer.name  === "User") {
+    if (activePlayer.name  === "user") {
         infoBar.innerHTML = `
             <p>Make your move</p>
         `;

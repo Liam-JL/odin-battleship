@@ -19,7 +19,7 @@ export function playerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    const sectionPlayer = new Player("User");
+    const sectionPlayer = new Player("user");
     savePlayer(sectionPlayer);
     const cells = placeShipsRandomly(sectionPlayer.board);
     renderPlacedShips(cells, uiBoard);
@@ -40,15 +40,14 @@ export function computerSection() {
     const uiBoard = section.querySelector(".ui-board");
     generateBoard(uiBoard);
 
-    const sectionPlayer = new Player("Computer");
+    const sectionPlayer = new Player("computer");
     savePlayer(sectionPlayer);
     placeShipsRandomly(sectionPlayer.board);
 
     //Event listeners
     for (let cell of uiBoard.children) {
         cell.addEventListener("click", () => {
-            handleCellClick(sectionPlayer.board, uiBoard);
-
+            handleCellClick();
         })
     }
 
