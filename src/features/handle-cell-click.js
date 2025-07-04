@@ -1,20 +1,20 @@
-import { getGameState} from "../shared/gamecontroller"
+import { getActivePlayer, getPlayers, getGameState} from "../shared/gamecontroller"
+import { attack } from "./attack";
 import { nextTurn } from "./next-turn";
 
-export function handleCellClick(board, uiBoard) {
-    if( getGameState() === "active") {
+//refactor so that handlecellclick just checks if user is active
+//seperate out other functionality to create an attack feature that works for both players
+
+
+export function handleCellClick() {
+    if(getGameState() === "active") {
         try {
+            console.log("User Attacks")
             const cell = event.target;
-            const attackResult = processAttack(cell, board);
-            renderCellOnClick(cell, attackResult);
-            if(attackResult === "hit") {
-                renderSunkShip(cell, board, uiBoard);
-            }
-
-            if (attackResult === "miss") {
-                nextTurn()
-            }
-
+            const coords = [cell.dataset.row, cell.dataset.col];
+            const computer = getPlayers()[1];
+            const attackResult = attack(computer, coords);
+            if (attackResult === "miss") nextTurn()
         } catch(error) {
             console.error(error)
             //TODO Log error in info bar
@@ -22,23 +22,4 @@ export function handleCellClick(board, uiBoard) {
     }
 }
 
-function processAttack(cell, board) {
-    const cellCoords = [cell.dataset.row, cell.dataset.col];
-    const attackResult = board.receiveAttack(cellCoords);
-    return attackResult;
-}
 
-function renderCellOnClick(cell, attackResult) {
-    cell.classList.add(`${attackResult}`);
-}
-
-function renderSunkShip(cell, board, uiBoard) {
-    const ship = board.getBoard()[cell.dataset.row][cell.dataset.col];
-    if(ship.isSunk()) {
-        const shipCells = ship.getCells();
-        shipCells.forEach(cell => {
-            let uiCell = uiBoard.querySelectorAll(`[data-row="${cell[0]}"]`)[cell[1]];
-            uiCell.classList.add("sunk");
-        });
-    }
-}
