@@ -21,6 +21,7 @@ export function controlButtons(gameboard, uiBoard) {
     })
 
     const playBtn = document.createElement("button");
+    playBtn.setAttribute("id", "playBtn");
     playBtn.classList.add("controls__btn", "controls__btn--play");
     playBtn.innerHTML = `
         Play
