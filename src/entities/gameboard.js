@@ -10,7 +10,7 @@ export class Gameboard {
     }
 
     getBoard() {
-        console.table(this._board);
+        // console.table(this._board);
         return this._board
     }
 
