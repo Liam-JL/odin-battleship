@@ -83,3 +83,16 @@
 .cell[data-ship="true"] {
   border: blue 2px solid;
 }
+
+.ui-board.winner-declared {
+  display: flex;
+  width: 420px;
+  height: 420px;
+  justify-content: center;
+  align-content: center;
+}
+
+.ui-board > img {
+  object-fit: contain;
+  width: 100%;
+}
