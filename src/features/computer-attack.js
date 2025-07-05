@@ -1,6 +1,7 @@
 import { getPlayers } from "../shared/gamecontroller";
 import { attack } from "./attack";
 import { nextTurn } from "./next-turn"
+import { checkWinCondition } from "./check-win-condition";
 
 export async function computerAttack() {
     const wait = await simulateThinking(1);
@@ -19,6 +20,7 @@ export async function computerAttack() {
                 nextTurn(); 
                 break;
             } else {
+                checkWinCondition()
                 const wait = await simulateThinking(0.5);
                 attackCount ++;
                 continue;
