@@ -14,6 +14,9 @@
   },
   "scripts": {
     "test": "jest",
-    "watch": "npm test -- --watch"
+    "watch": "npm test -- --watch",
+    "build": "webpack --mode production",
+    "start": "webpack serve --open --mode development",
+    "deploy": "npm run build && git subtree push --prefix dist origin gh-pages"
   }
 }
