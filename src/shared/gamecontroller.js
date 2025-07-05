@@ -1,5 +1,6 @@
 let gameState = "inactive";
 let players = [];
+let winner = null
 
 export function toggleGameState() {
     gameState = gameState === "inactive" ? "active" : "inactive"
@@ -29,3 +30,10 @@ export function toggleActivePlayer() {
     players.forEach(player => player.toggleActive())
 }
 
+export function getWinner() {
+    return winner;
+}
+
+export function saveWinner(player) {
+    winner = player;
+}
