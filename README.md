@@ -42,7 +42,7 @@ This is a browser-based implementation of the classic Battleship game, built as 
 
 ## Screenshot
 
-![screenshot](./shared/images/battleship-ss.png) 
+![screenshot](/shared/images/battleship-ss.png) 
 
 ---
 
